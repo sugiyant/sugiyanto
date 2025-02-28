@@ -1,0 +1,14 @@
+#quote-container {
+    text-align: center;
+    margin-top: 20%;
+}
+
+#quote {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+#source {
+    font-size: 18px;
+    margin-top: 10px;
+}
