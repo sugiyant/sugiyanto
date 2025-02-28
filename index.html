@@ -1,23 +1,37 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daily Islamic Quotes</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Kutipan Islami</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="light-mode">
     <div class="container">
-        <div class="quote-card">
-            <div class="quote-text" id="quote">
-                Loading...
-            </div>
-            <div class="quote-source" id="source">
-                Loading...
-            </div>
-            <button id="new-quote-btn">New Quote</button>
+        <h1>Kutipan Islami</h1>
+        <div id="quote-card" class="card">
+            <p id="quote-text">Memuat kutipan...</p>
+            <p id="quote-source"></p>
+        </div>
+        <button id="new-quote">Ganti Kutipan</button>
+    </div>
+    
+    <div class="navbar">
+        <button id="home">Beranda</button>
+        <button id="settings">Pengaturan</button>
+    </div>
+
+    <div id="settings-modal" class="modal">
+        <div class="modal-content">
+            <h2>Pengaturan Tema</h2>
+            <button class="theme-btn" data-theme="light-mode">Mode Terang</button>
+            <button class="theme-btn" data-theme="dark-mode">Mode Gelap</button>
+            <button class="theme-btn" data-theme="sepia-mode">Mode Sepia</button>
+            <button class="theme-btn" data-theme="cozy-dark-mode">Mode Cozy Gelap</button>
+            <button id="close-settings">Tutup</button>
         </div>
     </div>
-    <script src="scripts.js"></script>
+
+    <script src="script.js"></script>
 </body>
 </html>

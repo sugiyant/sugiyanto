@@ -1,39 +1,72 @@
-document.addEventListener('DOMContentLoaded', () => {
-    fetchQuote();
-    document.getElementById('new-quote-btn').addEventListener('click', fetchQuote);
+document.addEventListener("DOMContentLoaded", () => {
+    const quoteText = document.getElementById("quote-text");
+    const quoteSource = document.getElementById("quote-source");
+    const newQuoteBtn = document.getElementById("new-quote");
+    const settingsBtn = document.getElementById("settings");
+    const settingsModal = document.getElementById("settings-modal");
+    const closeSettings = document.getElementById("close-settings");
+    const themeButtons = document.querySelectorAll(".theme-btn");
+
+    async function fetchRandomQuote() {
+        const sources = ["quran", "hadith"];
+        const randomSource = sources[Math.floor(Math.random() * sources.length)];
+
+        if (randomSource === "quran") {
+            fetchQuran();
+        } else {
+            fetchHadith();
+        }
+    }
+
+    async function fetchQuran() {
+        try {
+            const response = await fetch("https://api.quran.sutanlab.id/surah");
+            const data = await response.json();
+            const surahs = data.data;
+            const randomSurah = surahs[Math.floor(Math.random() * surahs.length)];
+            const ayahResponse = await fetch(`https://api.quran.sutanlab.id/surah/${randomSurah.number}`);
+            const ayahData = await ayahResponse.json();
+            const ayahs = ayahData.data.verses;
+            const randomAyah = ayahs[Math.floor(Math.random() * ayahs.length)];
+            quoteText.textContent = `"${randomAyah.text.id}"`;
+            quoteSource.textContent = `- Al-Quran (QS ${randomSurah.name.transliteration.id} : ${randomAyah.number.inSurah})`;
+        } catch (error) {
+            quoteText.textContent = "Gagal memuat kutipan Al-Quran.";
+            quoteSource.textContent = "";
+        }
+    }
+
+    async function fetchHadith() {
+        try {
+            const booksResponse = await fetch('https://api.hadith.gading.dev/books');
+            const booksData = await booksResponse.json();
+            const books = booksData.data;
+            const randomBook = books[Math.floor(Math.random() * books.length)].id;
+            const bookResponse = await fetch(`https://api.hadith.gading.dev/books/${randomBook}`);
+            const bookData = await bookResponse.json();
+            const totalHadiths = bookData.data.total;
+            const randomHadithNumber = Math.floor(Math.random() * totalHadiths) + 1;
+            const hadithResponse = await fetch(`https://api.hadith.gading.dev/books/${randomBook}/${randomHadithNumber}`);
+            const hadithData = await hadithResponse.json();
+            const hadith = hadithData.data;
+            quoteText.textContent = `"${hadith.id}"`;
+            quoteSource.textContent = `- ${hadith.book.name} (${hadith.number})`;
+        } catch (error) {
+            quoteText.textContent = "Gagal memuat kutipan Hadis.";
+            quoteSource.textContent = "";
+        }
+    }
+
+    newQuoteBtn.addEventListener("click", fetchRandomQuote);
+    fetchRandomQuote();
+
+    settingsBtn.addEventListener("click", () => settingsModal.style.display = "block");
+    closeSettings.addEventListener("click", () => settingsModal.style.display = "none");
+
+    themeButtons.forEach(button => {
+        button.addEventListener("click", () => {
+            document.body.className = button.dataset.theme;
+            settingsModal.style.display = "none";
+        });
+    });
 });
-
-function fetchQuote() {
-    // URL API untuk mendapatkan quotes dari Al-Quran dan Hadits
-    const apiUrls = [
-        'https://api.alquran.cloud/v1/ayah/random?translations=id.indonesian', // Menambahkan terjemahan Bahasa Indonesia
-      //  'https://api.hadith.sutanlab.id/books/muslim?range=1-300' //
-    ];
-
-    // Pilih API secara acak
-    const apiUrl = apiUrls[Math.floor(Math.random() * apiUrls.length)];
-
-    fetch(apiUrl)
-        .then(response => response.json())
-        .then(data => {
-            let quote, source, translation = "";
-
-            if (apiUrl.includes('alquran')) {
-                quote = data.data.text; // Teks Arab
-                translation = data.data.translations[0].text; // Terjemahan Bahasa Indonesia
-                source = `Al-Quran Surah ${data.data.surah.englishName} Ayah ${data.data.numberInSurah}`;
-            } else if (apiUrl.includes('hadith')) {
-                const hadith = data.data.hadiths[Math.floor(Math.random() * data.data.hadiths.length)];
-                quote = hadith.arab; // Teks Arab
-                translation = hadith.id; // Terjemahan Bahasa Indonesia
-                source = `Hadith Muslim Book ${hadith.bookNumber} Hadith ${hadith.hadithNumber}`;
-            }
-            //gabungkan arab dan terjemahan
-            const combine = `<div style="text-align: right; font-size:1.2em; margin-bottom:10px">${quote}</div>
-            <div>${translation}</div>`;
-
-            document.getElementById('quote').innerHTML = combine;
-            document.getElementById('source').innerText = source;
-        })
-        .catch(error => console.error('Error fetching quote:', error));
-}
