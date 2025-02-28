@@ -1,72 +1,57 @@
-document.addEventListener("DOMContentLoaded", () => {
-    const quoteText = document.getElementById("quote-text");
-    const quoteSource = document.getElementById("quote-source");
-    const newQuoteBtn = document.getElementById("new-quote");
-    const settingsBtn = document.getElementById("settings");
-    const settingsModal = document.getElementById("settings-modal");
-    const closeSettings = document.getElementById("close-settings");
-    const themeButtons = document.querySelectorAll(".theme-btn");
+// Variabel global
+const quoteText = document.getElementById('quote-text');
+const generateQuoteButton = document.getElementById('generate-quote');
+const homeButton = document.getElementById('home-button');
+const settingsButton = document.getElementById('settings-button');
+const settingsModal = document.getElementById('settings-modal');
+const closeSettingsButton = document.getElementById('close-settings');
+const modeButtons = document.querySelectorAll('.mode-button');
 
-    async function fetchRandomQuote() {
-        const sources = ["quran", "hadith"];
-        const randomSource = sources[Math.floor(Math.random() * sources.length)];
+// API URLs (Anda bisa mencari API gratis untuk Al-Quran dan Hadis)
+const quranApiUrl = 'https://api.quran.com/api/v4/verses/random?language=id';
+const hadithApiUrl = 'https://api.hadith.gading.dev/random';
 
-        if (randomSource === "quran") {
-            fetchQuran();
-        } else {
-            fetchHadith();
-        }
-    }
+// Fungsi untuk mengambil kutipan acak
+async function fetchRandomQuote() {
+  const random = Math.random();
+  if (random < 0.5) {
+    // Ambil kutipan dari Al-Quran
+    const response = await fetch(quranApiUrl);
+    const data = await response.json();
+    quoteText.textContent = `"${data.verse.text}"`;
+  } else {
+    // Ambil kutipan dari Hadis
+    const response = await fetch(hadithApiUrl);
+    const data = await response.json();
+    quoteText.textContent = `"${data.contents.arab} - ${data.contents.id}"`;
+  }
+}
 
-    async function fetchQuran() {
-        try {
-            const response = await fetch("https://api.quran.sutanlab.id/surah");
-            const data = await response.json();
-            const surahs = data.data;
-            const randomSurah = surahs[Math.floor(Math.random() * surahs.length)];
-            const ayahResponse = await fetch(`https://api.quran.sutanlab.id/surah/${randomSurah.number}`);
-            const ayahData = await ayahResponse.json();
-            const ayahs = ayahData.data.verses;
-            const randomAyah = ayahs[Math.floor(Math.random() * ayahs.length)];
-            quoteText.textContent = `"${randomAyah.text.id}"`;
-            quoteSource.textContent = `- Al-Quran (QS ${randomSurah.name.transliteration.id} : ${randomAyah.number.inSurah})`;
-        } catch (error) {
-            quoteText.textContent = "Gagal memuat kutipan Al-Quran.";
-            quoteSource.textContent = "";
-        }
-    }
+// Event listener untuk tombol "Kutipan Baru"
+generateQuoteButton.addEventListener('click', fetchRandomQuote);
 
-    async function fetchHadith() {
-        try {
-            const booksResponse = await fetch('https://api.hadith.gading.dev/books');
-            const booksData = await booksResponse.json();
-            const books = booksData.data;
-            const randomBook = books[Math.floor(Math.random() * books.length)].id;
-            const bookResponse = await fetch(`https://api.hadith.gading.dev/books/${randomBook}`);
-            const bookData = await bookResponse.json();
-            const totalHadiths = bookData.data.total;
-            const randomHadithNumber = Math.floor(Math.random() * totalHadiths) + 1;
-            const hadithResponse = await fetch(`https://api.hadith.gading.dev/books/${randomBook}/${randomHadithNumber}`);
-            const hadithData = await hadithResponse.json();
-            const hadith = hadithData.data;
-            quoteText.textContent = `"${hadith.id}"`;
-            quoteSource.textContent = `- ${hadith.book.name} (${hadith.number})`;
-        } catch (error) {
-            quoteText.textContent = "Gagal memuat kutipan Hadis.";
-            quoteSource.textContent = "";
-        }
-    }
-
-    newQuoteBtn.addEventListener("click", fetchRandomQuote);
-    fetchRandomQuote();
-
-    settingsBtn.addEventListener("click", () => settingsModal.style.display = "block");
-    closeSettings.addEventListener("click", () => settingsModal.style.display = "none");
-
-    themeButtons.forEach(button => {
-        button.addEventListener("click", () => {
-            document.body.className = button.dataset.theme;
-            settingsModal.style.display = "none";
-        });
-    });
+// Event listener untuk tombol "Beranda"
+homeButton.addEventListener('click', () => {
+  quoteText.textContent = '"Selamat datang di Kutipan Islami!"';
 });
+
+// Event listener untuk tombol "Pengaturan"
+settingsButton.addEventListener('click', () => {
+  settingsModal.style.display = 'block';
+});
+
+// Event listener untuk tombol "Tutup Pengaturan"
+closeSettingsButton.addEventListener('click', () => {
+  settingsModal.style.display = 'none';
+});
+
+// Event listener untuk tombol mode
+modeButtons.forEach(button => {
+  button.addEventListener('click', () => {
+    const mode = button.getAttribute('data-mode');
+    document.body.className = mode;
+  });
+});
+
+// Panggil fungsi pertama kali saat halaman dimuat
+fetchRandomQuote();

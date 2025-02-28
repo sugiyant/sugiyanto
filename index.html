@@ -1,37 +1,36 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kutipan Islami</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kutipan Islami</title>
+  <link rel="stylesheet" href="style.css">
 </head>
-<body class="light-mode">
-    <div class="container">
-        <h1>Kutipan Islami</h1>
-        <div id="quote-card" class="card">
-            <p id="quote-text">Memuat kutipan...</p>
-            <p id="quote-source"></p>
-        </div>
-        <button id="new-quote">Ganti Kutipan</button>
-    </div>
-    
-    <div class="navbar">
-        <button id="home">Beranda</button>
-        <button id="settings">Pengaturan</button>
+<body>
+  <div class="container">
+    <!-- Card untuk menampilkan kutipan -->
+    <div class="card">
+      <p id="quote-text">"Klik tombol di bawah untuk mendapatkan kutipan islami."</p>
+      <button id="generate-quote">Kutipan Baru</button>
     </div>
 
-    <div id="settings-modal" class="modal">
-        <div class="modal-content">
-            <h2>Pengaturan Tema</h2>
-            <button class="theme-btn" data-theme="light-mode">Mode Terang</button>
-            <button class="theme-btn" data-theme="dark-mode">Mode Gelap</button>
-            <button class="theme-btn" data-theme="sepia-mode">Mode Sepia</button>
-            <button class="theme-btn" data-theme="cozy-dark-mode">Mode Cozy Gelap</button>
-            <button id="close-settings">Tutup</button>
-        </div>
+    <!-- Tombol navigasi -->
+    <div class="navigation">
+      <button id="home-button">Beranda</button>
+      <button id="settings-button">Pengaturan</button>
     </div>
 
-    <script src="script.js"></script>
+    <!-- Pengaturan mode -->
+    <div class="settings-modal" id="settings-modal">
+      <h3>Pengaturan Tampilan</h3>
+      <button class="mode-button" data-mode="light">Mode Terang</button>
+      <button class="mode-button" data-mode="dark">Mode Gelap</button>
+      <button class="mode-button" data-mode="sepia">Mode Sepia</button>
+      <button class="mode-button" data-mode="cozy">Mode Cozy</button>
+      <button id="close-settings">Tutup</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
