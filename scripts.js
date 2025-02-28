@@ -7,7 +7,7 @@ function fetchQuote() {
     // URL API untuk mendapatkan quotes dari Al-Quran dan Hadits
     const apiUrls = [
         'https://api.alquran.cloud/v1/ayah/random?translations=id.indonesian', // Menambahkan terjemahan Bahasa Indonesia
-        'https://api.hadith.sutanlab.id/books/muslim?range=1-300'
+      //  'https://api.hadith.sutanlab.id/books/muslim?range=1-300' //
     ];
 
     // Pilih API secara acak
