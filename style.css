@@ -25,13 +25,14 @@
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    max-width: 400px;
+    max-width: 600px;
     margin: 20px auto;
   }
   
   #quote-text {
     font-size: 1.2em;
     margin-bottom: 20px;
+    text-align: left;
   }
   
   button {
@@ -102,4 +103,25 @@
   body.cozy .card {
     background: #474787;
     color: #ff9f1c;
+  }
+
+  .arabic {
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-align: right;
+  }
+  
+  .translation {
+    font-style: italic;
+    margin-bottom: 10px;
+  }
+  
+  .tafsir {
+    margin-bottom: 10px;
+  }
+
+  .surah-info, .hadis-info {
+    font-weight: bold;
+    text-align: right;
   }
