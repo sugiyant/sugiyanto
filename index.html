@@ -3,18 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daily Quotes</title>
+    <title>Daily Islamic Quotes</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>Daily Quotes</h1>
-    <p>Click the button below to get a new quote</p>
-    <div id="quote-container">
+    <div class="container">
         <div class="quote-card">
-            <p id="quote"></p>
-            <p id="source"></p>
+            <div class="quote-text" id="quote">
+                Loading...
+            </div>
+            <div class="quote-source" id="source">
+                Loading...
+            </div>
+            <button id="new-quote-btn">New Quote</button>
         </div>
-        <button id="new-quote-btn">Get New Quote</button>
     </div>
     <script src="scripts.js"></script>
 </body>
