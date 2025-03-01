@@ -25,18 +25,20 @@ async function fetchRandomQuranQuote() {
 
     // cek apakah surah ada
     if (surahData) {
-        const numberOfAyah = surahData.number_of_ayah;
+        // perbaikan disini
+        const surah = surahData[randomSurahNumber.toString()] ? surahData[randomSurahNumber.toString()] : surahData ;
+        const numberOfAyah = surah.number_of_ayah;
         const randomAyahNumber = Math.floor(Math.random() * numberOfAyah) + 1;
 
-        const ayahText = surahData.text[randomAyahNumber];
-        const ayahTranslation = surahData.translations.id.text[randomAyahNumber];
-        const ayahTafsir = surahData.tafsir.id.kemenag.text[randomAyahNumber];
+        const ayahText = surah.text[randomAyahNumber];
+        const ayahTranslation = surah.translations.id.text[randomAyahNumber];
+        const ayahTafsir = surah.tafsir.id.kemenag.text[randomAyahNumber];
         
         // Tampilkan di dalam HTML
         quoteText.innerHTML = `
             <p class="arabic">${ayahText}</p>
             <p class="translation">${ayahTranslation}</p>
-            <p class="surah-info">QS. ${surahData.name_latin} : ${randomAyahNumber}</p>
+            <p class="surah-info">QS. ${surah.name_latin} : ${randomAyahNumber}</p>
         `;
 
         // Simpan data kutipan yang ditampilkan
@@ -83,11 +85,13 @@ async function showTafsir() {
 
     if (currentQuote.surahNumber && currentQuote.ayahNumber) {
         const surahData = await loadSurahData(currentQuote.surahNumber);
-        const ayahTafsir = surahData.tafsir.id.kemenag.text[currentQuote.ayahNumber];
+        // perbaikan disini
+        const surah = surahData[currentQuote.surahNumber.toString()] ? surahData[currentQuote.surahNumber.toString()] : surahData ;
+        const ayahTafsir = surah.tafsir.id.kemenag.text[currentQuote.ayahNumber];
 
         quoteText.innerHTML = `
             <p class="tafsir">${ayahTafsir}</p>
-            <p class="surah-info">QS. ${surahData.name_latin} : ${currentQuote.ayahNumber}</p>
+            <p class="surah-info">QS. ${surah.name_latin} : ${currentQuote.ayahNumber}</p>
         `;
     }
 }
