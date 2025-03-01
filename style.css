@@ -125,3 +125,15 @@
     font-weight: bold;
     text-align: right;
   }
+/* ... (kode CSS sebelumnya) ... */
+.button-group {
+    display: flex;
+    justify-content: center; /* Menengahkan tombol secara horizontal */
+    margin-top: 10px; /* Memberikan sedikit margin di atas tombol */
+  }
+  
+  .button-group button{
+      margin: 0 5px;
+  }
+  /* ... (kode CSS selanjutnya) ... */
+  
