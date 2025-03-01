@@ -1,41 +1,56 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kutipan Islami</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kutipan Islami</title>
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-  <div class="container">
-    <!-- Card untuk menampilkan kutipan -->
-    <div class="card">
-      <div id="quote-text">
-        <p>"Klik tombol di bawah untuk mendapatkan kutipan islami."</p>
-      </div>
-      <div class="button-group">
-        <button id="generate-quote">Kutipan Baru</button>
-        <button id="show-tafsir">Penjelasan</button>
-      </div>
-    </div>
+    <main>
+        <div class="card-container">
+            <div class="card">
+                <div id="quote-text">
+                    "Selamat datang di Kutipan Islami!"
+                </div>
+            </div>
+        </div>
+        <div class="button-container">
+            <button id="generate-quote">Kutipan Baru</button>
+            <button id="show-tafsir">Penjelasan</button>
+            <button id="share-button">Bagikan</button>
+            <div id="share-options">
+                <button id="copy-link">Salin Teks</button>
+                <button id="whatsapp">WhatsApp</button>
+                <button id="facebook">Facebook</button>
+                <button id="telegram">Telegram</button>
+                <button id="twitter">Twitter</button>
+            </div>
+        </div>
+    </main>
 
-    <!-- Tombol navigasi -->
-    <div class="navigation">
-      <button id="home-button">Beranda</button>
-      <button id="settings-button">Pengaturan</button>
+    <div id="settings-modal">
+        <div class="modal-content">
+            <button id="close-settings">Tutup</button>
+            <h2>Pengaturan</h2>
+            <button id="show-mode-options">Tampilkan Mode</button>
+            <!-- Pilihan mode sekarang ada di dalam modal, dan disembunyikan -->
+            <div class="mode-container hidden">
+                <button class="mode-button" data-mode="light-mode">Terang</button>
+                <button class="mode-button" data-mode="dark-mode">Gelap</button>
+                <button class="mode-button" data-mode="sepia-mode">Sepia</button>
+                <button class="mode-button" data-mode="cozy-mode">Cozy</button>
+            </div>
+        </div>
     </div>
+    <footer>
+        <button id="home-button">Beranda</button>
+        <button id="settings-button">Pengaturan</button>
+    </footer>
 
-    <!-- Pengaturan mode -->
-    <div class="settings-modal" id="settings-modal">
-      <h3>Pengaturan Tampilan</h3>
-      <button class="mode-button" data-mode="light">Mode Terang</button>
-      <button class="mode-button" data-mode="dark">Mode Gelap</button>
-      <button class="mode-button" data-mode="sepia">Mode Sepia</button>
-      <button class="mode-button" data-mode="cozy">Mode Cozy</button>
-      <button id="close-settings">Tutup</button>
-    </div>
-  </div>
-
-  <script src="scripts.js"></script>
+    <script src="scripts.js"></script>
 </body>
+
 </html>

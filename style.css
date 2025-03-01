@@ -1,139 +1,221 @@
-/* Reset default margin dan padding */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
-  body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    color: #333;
+/* Gaya untuk seluruh body */
+body {
     display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-direction: column;
     min-height: 100vh;
+    margin: 0;
+    font-family: Arial, sans-serif;
     transition: background-color 0.3s ease, color 0.3s ease;
-  }
-  
-  .container {
+}
+
+/* Gaya untuk main*/
+main {
+    flex-grow: 1; /* Mengatur main memenuhi ruang yang tersedia */
+    margin-bottom: 20px; /* Berikan sedikit ruang di bawah main */
+}
+
+/* Gaya untuk footer */
+footer {
+    background-color: #f0f0f0;
+    padding: 10px;
     text-align: center;
-  }
-  
-  .card {
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    max-width: 600px;
-    margin: 20px auto;
-  }
-  
-  #quote-text {
-    font-size: 1.2em;
-    margin-bottom: 20px;
-    text-align: left;
-  }
-  
-  button {
-    padding: 10px 20px;
+}
+
+/* Gaya untuk tombol secara umum */
+button {
+    padding: 10px 15px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    font-size: 1em;
-    margin: 5px;
-    transition: background-color 0.3s ease, color 0.3s ease;
-  }
-  
-  button:hover {
-    opacity: 0.9;
-  }
-  
-  .navigation {
-    margin-top: 20px;
-  }
-  
-  .settings-modal {
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+/* Gaya untuk tombol "Kutipan Baru" dan "Penjelasan" */
+#generate-quote,
+#show-tafsir {
+    background-color: #4CAF50;
+    color: white;
+    margin-right: 10px;
+}
+
+#generate-quote:hover,
+#show-tafsir:hover {
+    background-color: #367c39;
+}
+
+/* Gaya untuk tombol bagikan */
+#share-button {
+    background-color: #008CBA;
+    color: white;
+}
+
+#share-button:hover {
+    background-color: #006080;
+}
+
+/* Gaya untuk wadah opsi berbagi */
+#share-options {
     display: none;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    z-index: 10;
-  }
-  
-  .mode-button {
-    display: block;
-    width: 100%;
-    margin: 5px 0;
-  }
-  
-  /* Mode Gelap */
-  body.dark {
-    background-color: #121212;
-    color: #e0e0e0;
-  }
-  
-  body.dark .card {
-    background: #1e1e1e;
-    color: #e0e0e0;
-  }
-  
-  /* Mode Sepia */
-  body.sepia {
-    background-color: #f4e9d8;
-    color: #5a4b3e;
-  }
-  
-  body.sepia .card {
-    background: #f9f0e3;
-    color: #5a4b3e;
-  }
-  
-  /* Mode Cozy */
-  body.cozy {
-    background-color: #2c2c54;
-    color: #ff9f1c;
-  }
-  
-  body.cozy .card {
-    background: #474787;
-    color: #ff9f1c;
-  }
-
-  .arabic {
-    font-size: 1.5em;
-    font-weight: bold;
-    margin-bottom: 10px;
-    text-align: right;
-  }
-  
-  .translation {
-    font-style: italic;
-    margin-bottom: 10px;
-  }
-  
-  .tafsir {
-    margin-bottom: 10px;
-  }
-
-  .surah-info, .hadis-info {
-    font-weight: bold;
-    text-align: right;
-  }
-/* ... (kode CSS sebelumnya) ... */
-.button-group {
+    margin-top: 10px;
     display: flex;
-    justify-content: center; /* Menengahkan tombol secara horizontal */
-    margin-top: 10px; /* Memberikan sedikit margin di atas tombol */
-  }
-  
-  .button-group button{
-      margin: 0 5px;
-  }
-  /* ... (kode CSS selanjutnya) ... */
-  
+    flex-wrap: wrap;
+    gap: 5px;
+    justify-content: center;
+}
+
+/* Gaya untuk tombol dalam opsi berbagi */
+#share-options button {
+    background-color: #f0f0f0;
+    color: #333;
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+}
+
+#share-options button:hover {
+    background-color: #ccc;
+}
+
+/* Gaya untuk teks kutipan arab*/
+.arabic {
+    font-size: 24px;
+    margin-bottom: 10px;
+    text-align: right;
+    font-family: 'Amiri', serif;
+}
+
+/* Gaya untuk teks terjemahan */
+.translation {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+/* Gaya untuk teks info hadis dan surah */
+.hadis-info,
+.surah-info {
+    font-size: 14px;
+    color: #555;
+}
+
+.tafsir {
+    font-size: 16px;
+}
+
+/* Gaya untuk card container */
+.card-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+    padding: 20px;
+}
+
+/* Gaya untuk card */
+.card {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    max-width: 600px;
+    width: 90%;
+    text-align: center;
+}
+
+/* Gaya untuk button container*/
+.button-container {
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+/* Gaya untuk modal content */
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 400px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+/* Gaya untuk mode container */
+.mode-container {
+    display: flex;
+    gap: 5px;
+    flex-wrap: wrap;
+}
+
+/* Gaya hidden */
+.hidden {
+    display: none;
+}
+
+/* Gaya untuk mode gelap */
+body.dark-mode {
+    background-color: #333;
+    color: #eee;
+}
+
+body.dark-mode .card {
+    background-color: #444;
+    box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
+}
+
+body.dark-mode .modal-content {
+    background-color: #444;
+    color: #eee;
+}
+
+/* Gaya untuk mode sepia */
+body.sepia-mode {
+    background-color: #f4e8d2; /* Latar belakang sepia */
+    color: #5d4a3b; /* Warna teks sepia */
+}
+
+body.sepia-mode .card {
+    background-color: #f9f1e2; /* Latar belakang card sepia */
+    box-shadow: 0 4px 8px rgba(93, 74, 59, 0.1); /* Bayangan sepia */
+}
+
+body.sepia-mode .modal-content {
+    background-color: #f9f1e2; /* Latar belakang modal sepia */
+    color: #5d4a3b;
+}
+
+/* Gaya untuk mode cozy */
+body.cozy-mode {
+    background-color: #f2e9e4; /* Latar belakang cozy */
+    color: #4a4e69; /* Warna teks cozy */
+}
+
+body.cozy-mode .card {
+    background-color: #c9ada7; /* Latar belakang card cozy */
+    box-shadow: 0 4px 8px rgba(74, 78, 105, 0.1); /* Bayangan cozy */
+}
+
+body.cozy-mode .modal-content {
+    background-color: #c9ada7; /* Latar belakang modal cozy */
+    color: #4a4e69;
+}
+
+/* Media query untuk layar yang lebih kecil */
+@media (max-width: 600px) {
+
+    #generate-quote,
+    #show-tafsir,
+    #share-button {
+        width: 100%; /* Tombol-tombol memenuhi lebar */
+        margin-right: 0; /* Hapus margin kanan */
+        margin-bottom: 5px;
+    }
+
+    #share-options {
+        justify-content: center;
+    }
+
+    .card {
+        width: 95%;
+    }
+}
